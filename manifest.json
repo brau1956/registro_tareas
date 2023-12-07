@@ -1,0 +1,31 @@
+{
+  "name": "Mi Página Web",
+  "short_name": "Página",
+  "description": "Una página web nueva",
+  "start_url": "./index.html",
+  "scope": "./index.html",
+  "display": "standalone",
+  "background_color": "#E55435",
+  "theme_color": "#F55938",
+  "icons": [
+    {
+      "src": "kis.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "kiss.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "ki1.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ],
+  "id": "./"
+}
+
+  
+  
