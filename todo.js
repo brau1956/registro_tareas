@@ -25,23 +25,30 @@ var input = document.getElementById("datos");
 
 
         
+// Declara tareaID en un ámbito global
+let tareaID;
 
-        function aparecer() {
-        
+function aparecer() {
+    const borrar = document.createElement('button');
+    borrar.textContent = "X";
+    borrar.className = "btn-delete";
+    
+    borrar.addEventListener('click', (e) => {
+        const item = e.target.parentElement;
+        div.removeChild(item);
+        actualizarTareas();
 
-       const borrar = document.createElement('button');
-            borrar.textContent = "X";
-            borrar.className = "btn-delete";
-            borrar.addEventListener('click', (e) => {
-                const item = e.target.parentElement;
-                div.removeChild(item); // Esto eliminará el elemento contenedor completo
-                actualizarTareas(); // Llama a la función para actualizar las tareas después de eliminar una
-
-                eliminarRegistro({ id: tareaID });
-            });
-            return borrar;
-        
+        // Ahora puedes utilizar tareaID aquí sin problemas
+        if (typeof tareaID !== 'undefined') {
+            // Tu código que utiliza tareaID aquí
+        } else {
+            console.error('tareaID no está definida');
         }
+    });
+
+    
+}
+
 
         function eliminarRegistro(id) {
             // Realiza una solicitud Fetch para eliminar el registro
@@ -130,10 +137,9 @@ var input = document.getElementById("datos");
             localStorage.setItem("tarea", JSON.stringify(tareas));
             const datitos = localStorage.getItem("tarea");
             
-            const xhr = new XMLHttpRequest();
 
                 // Configura la solicitud
-                xhr.open('POST', "http://localhost/braulio/nueva/to_to_list.json", true);
+                xhr.open('POST', "http://localhost/registro_tareas/to_to_list.json", true);
                 xhr.setRequestHeader('Content-Type', 'application/json');
                 // Convierte los datos a formato JSON y envía la solicitud
                 xhr.send(datitos);
@@ -154,7 +160,7 @@ var input = document.getElementById("datos");
 
     document.addEventListener("DOMContentLoaded", (event) => {  
         mostrarTareasAlmacenadas();     
-        fetch('http://localhost/braulio/nueva/server.php',{
+        fetch('http://localhost/registro_tareas/server.php',{
             method: "post"           
         })
         .then(response => {

@@ -7,24 +7,30 @@ $data_base = 'registro';
 $conn = new mysqli($SERVER, $username, $password, $data_base);
 
 if ($conn->connect_error) {
-    echo "Error en la conexión: " . $conn->connect_error;
+    echo json_encode(array('error' => 'Error en la conexión a la base de datos'));
     exit;
 }
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-// Obtener el ID de la tarea a eliminar desde la solicitud POST
-$eliminar = isset($_POST['id']) ? $_POST['id'] : null;
+    $eliminar = $_POST["tareas"];
 
-if ($eliminar !== null) {
-    $sql = "DELETE FROM tareas WHERE tareaID = '$eliminar'";
+    $sql_select = "SELECT tareaID FROM tareas WHERE tareaID = $eliminar";
 
-    if ($conn->query($sql) === true) {
-        echo "Eliminación exitosa";
+    $resultado = $conn->query($sql_select);
+
+    if ($resultado->num_rows > 0) {
+        $sql_delete = "DELETE FROM tareas WHERE tareaID = $eliminar";
+
+        if ($conn->query($sql_delete) === TRUE) {
+            echo "Tarea eliminada correctamente.";
+        } else {
+            echo "Error al eliminar la tarea: " . $conn->error;
+        }
     } else {
-        echo "Error al eliminar: " . $conn->error;
+        echo "La tarea con el ID $eliminar no existe.";
     }
 } else {
-    echo "ID de tarea no proporcionado";
+    echo "La solicitud no es de tipo POST. Los elementos no se eliminaron.";
 }
 
-$conn->close();
 ?>
