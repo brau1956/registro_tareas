@@ -1,50 +1,33 @@
-
 document.getElementById("saveData").addEventListener("submit", function (e) {
     e.preventDefault(); // Evita que se envíe el formulario
-   
-     // Obtiene todos los datos del formulario
-     var formData = new FormData(document.getElementById("saveData"));
-   
-     // Crea un objeto vacío para almacenar los datos
-     var datos = {};
-  
-     // Itera a través de los pares clave-valor en formData y los almacena en el objeto datos
-     formData.forEach(function(value, key) {
-         datos[key] = value;
-     });
-   
-     // Convierte los datos a formato JSON
-     var datosJSON = JSON.stringify(datos);
-   
-     // Imprime el objeto JSON en la consola
-     console.log(datosJSON);
-   
-     // Para ver los datos en su forma original (pares clave-valor)
-     formData.forEach(function(value, key) {
-         console.log(key + ": " + value);
-     });
-     fetch("src/data_base.php",{
-      method:"POST",
-      body: JSON.stringify(datos)   
+
+    // Crea un objeto vacío para almacenar los datos
+    var datos = {};
+
+    // Itera a través de los pares clave-valor en formData y los almacena en el objeto datos
+    var formData = new FormData(document.getElementById("saveData"));
+    formData.forEach(function(value, key) {
+        datos[key] = value;
+    });
+
+    // Imprime el objeto datos en la consola
+    console.log(datos);
+
+    // Realiza la solicitud fetch al servidor
+    fetch("src/data_base.php", {
+        method: "POST",
+        body: JSON.stringify(datos) // No necesitas convertirlo a JSON aquí-0- 0-
     })
-                      
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Error en la solicitud.');
+    .then((response) => response.json())
+    .then((response) => {
+        if (response.estatus == 0) {
+            window.location = "index.php";
+        } else {
+            alert("Usuario no válido");
         }
-        return response.json(); // Parsear la respuesta como JSON
-      })
-      .catch(error => {
-        console.log('Error:', error);
-      })
-      .then(data => {
-        console.log(data); // Hacer algo con los datos recibido
-        window.location="login.html";
-      });
-      
-         });
-  
-   
-
-// URL de la API o recurso que deseas consultar
-
+    })
+    .catch((error) => {
+        console.error("Error:", error);
+        alert("Ocurrió un error en la solicitud al servidor.");
+    });
+});

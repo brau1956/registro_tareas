@@ -11,7 +11,7 @@ document.getElementById("registros").addEventListener("submit", function (p) {
          datos[key] = value;
      });
    
-      fetch("src/login.php",{
+      fetch("login.php",{
        method:"POST",
        body: JSON.stringify(datos),
        headers:{
@@ -20,14 +20,13 @@ document.getElementById("registros").addEventListener("submit", function (p) {
   
       }) 
       .then((response) => response.json())
-      .catch((error) => console.error("Error:", error))
       .then((response) => {
         if(response.estatus==1)
           window.location="todoList.php";
         else 
-          alert("Usuario invalido");
+           alert("Usuario invalido");
       });
   }else{
- alert("datos incorrectoss");   
+   alert("datos incorrectoss");   
   }
      });

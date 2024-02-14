@@ -10,27 +10,21 @@ if ($conn->connect_error) {
     echo json_encode(array('error' => 'Error en la conexión a la base de datos'));
     exit;
 }
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    $eliminar = $_POST["tareas"];
-
-    $sql_select = "SELECT tareaID FROM tareas WHERE tareaID = $eliminar";
-
-    $resultado = $conn->query($sql_select);
-
-    if ($resultado->num_rows > 0) {
-        $sql_delete = "DELETE FROM tareas WHERE tareaID = $eliminar";
-
-        if ($conn->query($sql_delete) === TRUE) {
-            echo "Tarea eliminada correctamente.";
-        } else {
-            echo "Error al eliminar la tarea: " . $conn->error;
-        }
-    } else {
-        echo "La tarea con el ID $eliminar no existe.";
-    }
+$data = json_decode(file_get_contents('php://input'));
+ 
+$tareas= $data->tarea;
+  $sql = "DELETE FROM tareas WHERE tarea ='$tareas'";
+ if($conn->query($sql) === TRUE){
+    echo json_encode(array('mensaje' => 'Tarea eliminada correctamente'));
 } else {
-    echo "La solicitud no es de tipo POST. Los elementos no se eliminaron.";
+    // Error al eliminar la tarea
+    echo json_encode(array('error' => 'Error al eliminar la tarea: ' . $conn->error));
 }
+$conn->close();
+ 
+
+
+
+
 
 ?>

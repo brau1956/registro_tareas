@@ -24,7 +24,45 @@
 .estilo{
   margin-left: 30px;
 }
-body{
-    background-color:#047dd4;
+.body{
+    background-color:#1d2327;
     
+}
+#lista-tareas{
+  list-style-type: none; /* Quita los puntos de lista */
+ /* Elimina el espacio interno en la lista */
+}
+#list{
+
+  margin-bottom: 5px; /* Espacio entre cada tarea */
+  background-color: #999eee; /* Color de fondo de cada tarea */
+  border-radius: 5px; 
+  text-align: center;
+  box-sizing: border-box;
+  display: flex; /* Usamos flexbox para centrar verticalmente */
+  justify-content: center; /* Centramos horizontalmente */
+  align-items: center; /* Centramos verticalmente */
+  list-style-type: none; /* Quitamos los puntos de la lista */
+}
+
+.contenedor-lista-tareas{
+  width: 30px; /* Ancho del div */
+  padding: 0; /* Espaciado interno */
+  background-color: #f0f0f0; /* Color de fondo */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+#btn{
+  display: inline-block;
+  
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff; /* Color de fondo */
+  color: #fff; /* Color del texto */
 }

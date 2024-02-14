@@ -1,6 +1,7 @@
 [
     {
         "id":1,
-        "nombre": "braulio"
+        "nombre": "braulio",
+        "id_usuario":""
     }
 ]

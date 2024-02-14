@@ -12,10 +12,15 @@ margin:20px auto;
 .regi{
     text-align: center;
 }
-.submit{
-    padding: 10px;
+
+.centrar{
+     text-align: center;
+}
+.btn1{
+    
+    
     color: #fff;
-    background: #0098cd;
+    background: #9bd8ee;
     width: 300px;
     margin: 20px auto;
     margin-top: 0;
@@ -23,5 +28,21 @@ margin:20px auto;
     border-radius: 4px;
     cursor: pointer;
     align-content: center;
-    justify-content: center;
-}
+    text-align: center;
+} 
+
+    .login {
+        text-align: center;
+    }
+    
+    .login a {
+        display: block;
+        margin-top: 10px; /* Espacio adicional si es necesario */
+    }
+
+    body {
+        background-image: url('src/stylesheet/calabera.JPEG'); /* Reemplaza 'ruta_de_la_imagen.jpg' con la ruta real de tu imagen */
+        background-size: 100% 100%; /* Ajusta el tamaño de la imagen para cubrir todo el fondo */
+        background-position: center; /* Centra la imagen en el fondo */
+        background-repeat: no-repeat; /* Evita que la imagen se repita */
+    }
